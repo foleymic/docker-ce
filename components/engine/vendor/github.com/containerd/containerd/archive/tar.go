@@ -381,7 +381,7 @@ func (cw *changeWriter) HandleChange(k fs.ChangeKind, p string, f os.FileInfo, e
 				additionalLinks = cw.inodeRefs[inode]
 				delete(cw.inodeRefs, inode)
 			}
-		} else if k == fs.ChangeKindUnmodified {
+		} else if k == fs.ChangeKindUnmodified && !f.IsDir() {
 			// Nothing to write to diff
 			return nil
 		}
